@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <script src="js/script.js" defer></script>
+    <title>SpaceX</title>
+    <style>
+      /* Adding User profile in the mobile-menu */
+      .user-profile {
+        padding: 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      .user-profile .user-name {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 5px;
+      }
+
+      .user-profile .user-email {
+        font-size: 14px;
+        opacity: 0.7;
+      }
+
+      .logout-btn {
+        display: block;
+        width: 100px;
+        margin: 10px auto 0;
+        padding: 5px 10px;
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: #fff;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-family: 'Familjen Grotesk', sans-serif;
+        text-transform: uppercase;
+        font-size: 12px;
+      }
+
+      .logout-btn:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="overlay"></div>
+    <div id="mobile-menu" class="mobile-main-menu">
+      <!-- User profile section -->
+      <div id="user-profile" class="user-profile hidden">
+        <div class="user-name" id="display-name">USER NAME</div>
+        <div class="user-email" id="display-email">user@example.com</div>
+        <button class="logout-btn" id="logout-btn">LOGOUT</button>
+      </div>
+      <ul>
+        <li><a href="#">Mission</a></li>
+        <li><a href="#">Launches</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Updates</a></li>
+        <li><a href="shop.html" target="_blank" rel="noopener noreferrer">Shop</a></li>
+        
+        <li class="mobile-only"><a href="falcon9.html">Falcon 9</a></li>
+        <li class="mobile-only"><a href="falcon-heavy.html">Falcon Heavy</a></li>
+        <li class="mobile-only"><a href="dragon.html">Dragon</a></li>
+        <li class="mobile-only"><a href="#">Starship</a></li>
+        <li class="mobile-only"><a href="#">Human Spaceflight</a></li>
+        <li class="mobile-only"><a href="#">Rideshare</a></li>
+        <li class="mobile-only"><a href="#">Starlink</a></li>
+        <li class="mobile-only" id="auth-menu-item"><a href="account.html">SIGN UP / LOGIN</a></li>
+      </ul>
+    </div>
+    <header class="main-header">
+      <div class="logo">
+        <a href="index.html">
+          <img src="img/logo.png" alt="SpaceX" />
+        </a>
+      </div>
+      <nav class="desktop-main-menu">
+        <ul>
+          <li><a href="falcon9.html">Falcon 9</a></li>
+          <li><a href="falcon-heavy.html">Falcon Heavy</a></li>
+          <li><a href="dragon.html">Dragon</a></li>
+          <li><a href="#">Starship</a></li>
+          <li><a href="#">Human Spaceflight</a></li>
+          <li><a href="#">Rideshare</a></li>
+          <li><a href="#">Starlink</a></li>
+          <li><a href="shop.html" target="_blank" rel="noopener noreferrer">Shop</a></li>
+          <li id="desktop-auth-item"><a href="account.html" class="login-signup">SIGN UP / LOGIN</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Hamburger Menu -->
+    <button id="menu-btn" class="hamburger" type="button">
+      <span class="hamburger-top"></span>
+      <span class="hamburger-middle"></span>
+      <span class="hamburger-bottom"></span>
+    </button>
+
+    <!-- Section A -->
+    <section class="section-a">
+      <div class="section-inner">
+        <h4>Completed Missions</h4>
+        <h2>FRAM2 Returns to</h2>
+        <h2>Earth</h2>
+        <a href="#" class="btn">
+          <div class="hover"></div>
+          <span>Rewatch</span>
+        </a>
+      </div>
+
+      <div class="scroll-arrow">
+        <svg width="30px" height="20px">
+          <path
+            stroke="#ffffff"
+            fill="none"
+            stroke-width="2px"
+            d="M2.000,5.000 L15.000,18.000 L28.000,5.000 "
+          ></path>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Section B -->
+    <section class="section-b">
+      <div class="section-inner">
+        <h4>Recent Launch</h4>
+        <h2>Starlink Mission</h2>
+        <a href="#" class="btn">
+          <div class="hover"></div>
+          <span>Rewatch</span>
+        </a>
+      </div>
+
+      <div class="scroll-arrow">
+        <svg width="30px" height="20px">
+          <path
+            stroke="#ffffff"
+            fill="none"
+            stroke-width="2px"
+            d="M2.000,5.000 L15.000,18.000 L28.000,5.000 "
+          ></path>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Section C -->
+    <section class="section-c">
+      <div class="section-inner">
+        <h4>Upcoming Mission</h4>
+        <h2>SES-22 Mission</h2>
+        <a href="#" class="btn">
+          <div class="hover"></div>
+          <span>Rewatch</span>
+        </a>
+      </div>
+
+      <div class="scroll-arrow">
+        <svg width="30px" height="20px">
+          <path
+            stroke="#ffffff"
+            fill="none"
+            stroke-width="2px"
+            d="M2.000,5.000 L15.000,18.000 L28.000,5.000 "
+          ></path>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Section D -->
+    <section class="section-d">
+      <div class="section-inner">
+        <h4>Recent Launch</h4>
+        <h2>Globalstar FM15 Mission</h2>
+        <a href="#" class="btn">
+          <div class="hover"></div>
+          <span>Rewatch</span>
+        </a>
+      </div>
+
+      <div class="scroll-arrow">
+        <svg width="30px" height="20px">
+          <path
+            stroke="#ffffff"
+            fill="none"
+            stroke-width="2px"
+            d="M2.000,5.000 L15.000,18.000 L28.000,5.000 "
+          ></path>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Section E -->
+    <section class="section-e">
+      <div class="section-inner">
+        <h2>Starlink mission</h2>
+        <a href="#" class="btn">
+          <div class="hover"></div>
+          <span>Rewatch</span>
+        </a>
+      </div>
+
+      <div class="scroll-arrow">
+        <svg width="30px" height="20px">
+          <path
+            stroke="#ffffff"
+            fill="none"
+            stroke-width="2px"
+            d="M2.000,5.000 L15.000,18.000 L28.000,5.000 "
+          ></path>
+        </svg>
+      </div>
+    </section>
+
+    <section class="section-v">
+      <div class="section-inner">
+        <h2>Crew-9 returns to</h2>
+        <h2>Earth</h2>
+        <a href="#" class="btn">
+          <div class="hover"></div>
+          <span>Rewatch</span>
+        </a>
+      </div>
+
+      <div class="scroll-arrow">
+        <svg width="30px" height="20px">
+          <path
+            stroke="#ffffff"
+            fill="none"
+            stroke-width="2px"
+            d="M2.000,5.000 L15.000,18.000 L28.000,5.000 "
+          ></path>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Section F -->
+    <section class="section-f">
+      <div class="section-inner">
+        <h2>Advancing Human</h2>
+        <h2>Spaceflight</h2>
+        <a href="#" class="btn">
+          <div class="hover"></div>
+          <span>Rewatch</span>
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      <ul>
+        <li>SpaceX &copy; 2025</li>
+        <li><a href="#">Twitter</a></li>
+        <li><a href="#">YouTube</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Flickr</a></li>
+        <li><a href="#">LinkedIn</a></li>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Suppliers</a></li>
+      </ul>
+    </footer>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+  checkUserLoggedIn();
+  
+  function getUserData() {
+    const userData = localStorage.getItem('spacexUser');
+    return userData ? JSON.parse(userData) : null;
+  }
+  
+  function checkUserLoggedIn() {
+    const userData = getUserData();
+    
+    if (userData && userData.isLoggedIn) {
+      document.getElementById('display-name').textContent = 
+        userData.firstName + (userData.lastName ? ' ' + userData.lastName : '');
+      document.getElementById('display-email').textContent = userData.email;
+      document.getElementById('user-profile').classList.remove('hidden');
+      
+      const mobileMenuList = document.querySelector('#mobile-menu ul');
+      
+      if (!document.getElementById('welcome-item')) {
+        const welcomeItem = document.createElement('li');
+        welcomeItem.id = 'welcome-item';
+        welcomeItem.style.borderBottom = '1px solid rgba(255, 255, 255, 0.2)';
+        welcomeItem.style.padding = '15px 0';
+        welcomeItem.innerHTML = `<span style="display:block; text-align:center; font-weight:bold;">WELCOME, ${userData.firstName.toUpperCase()}</span>`;
+        
+        if (mobileMenuList.firstChild) {
+          mobileMenuList.insertBefore(welcomeItem, mobileMenuList.firstChild);
+        } else {
+          mobileMenuList.appendChild(welcomeItem);
+        }
+      }
+      
+      const mobileAuthItem = document.getElementById('auth-menu-item');
+      if (mobileAuthItem) {
+        mobileAuthItem.style.display = 'none';
+      }
+      
+      const desktopAuthItem = document.getElementById('desktop-auth-item');
+      if (desktopAuthItem) {
+        desktopAuthItem.style.display = 'none';
+      }
+    }
+  }
+  
+  document.getElementById('logout-btn').addEventListener('click', function() {
+    localStorage.removeItem('spacexUser');
+    
+    const welcomeItem = document.getElementById('welcome-item');
+    if (welcomeItem) {
+      welcomeItem.remove();
+    }
+    
+    // Hide user profile
+    document.getElementById('user-profile').classList.add('hidden');
+    
+    const mobileAuthItem = document.getElementById('auth-menu-item');
+    if (mobileAuthItem) {
+      mobileAuthItem.style.display = '';
+      mobileAuthItem.innerHTML = '<a href="account.html">SIGN UP / LOGIN</a>';
+    }
+    
+    const desktopAuthItem = document.getElementById('desktop-auth-item');
+    if (desktopAuthItem) {
+      desktopAuthItem.style.display = '';
+      desktopAuthItem.innerHTML = '<a href="account.html" class="login-signup">SIGN UP / LOGIN</a>';
+    }
+  });
+});
+    </script>
+  </body>
+</html>

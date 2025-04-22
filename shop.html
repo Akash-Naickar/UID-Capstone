@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <script src="js/script.js" defer></script>
+    <title>SpaceX Shop</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;600;700&display=swap');
+      
+      body {
+        font-family: 'Familjen Grotesk', sans-serif;
+        text-transform: uppercase;
+      }
+        
+      .products-container {
+        max-width: 1400px;
+        margin: 150px auto 50px;
+        padding: 0 40px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 40px;
+      }
+
+      .product-card {               
+        background: rgba(20, 20, 20, 0.8);
+        border-radius: 8px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+      }
+
+      .product-image-container {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        overflow: hidden;
+      }
+
+      .product-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: opacity 0.5s ease;
+      }
+
+      .product-image.secondary {
+        opacity: 0;
+      }
+
+      .product-card:hover .product-image.primary {
+        opacity: 0;
+      }
+
+      .product-card:hover .product-image.secondary {
+        opacity: 1;
+      }
+
+      .product-info {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+      }
+
+      .product-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+      }
+
+      .product-price {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 15px;
+      }
+
+      .product-card .btn {
+        min-width: auto;
+        width: 100%;
+        padding: 10px;
+        margin-top: auto;
+        text-align: center;
+      }
+
+      .shop-categories {
+        display: flex;
+        justify-content: center;
+        margin: 120px 0 30px;
+        flex-wrap: wrap;
+        padding: 0 20px;
+      }
+
+      .shop-category {
+        margin: 8px 15px;
+        padding: 10px 20px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .shop-category:hover, .shop-category.active {
+        background-color: #fff;
+        color: #000;
+      }
+
+      .shop-header {
+        text-align: center;
+        padding-top: 120px;
+        text-transform: uppercase;
+      }
+
+      .shop-header h1 {
+        font-size: 48px;
+        font-weight: 700;
+        margin-bottom: 20px;
+      }
+
+       
+      .shop-a {
+        background-image: url('img/rd2.jpg'); 
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+        height: 80vh; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .shop-a::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); 
+        z-index: 0;
+      }
+
+
+      .section-inner-center {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        color: white;
+        width: 100%;
+        max-width: 100%; 
+        padding: 0 20px; 
+        left: 0; 
+        transform: none; 
+      }
+
+      .login-signup {
+        border: 2px solid white;
+        border-radius: 4px;
+        padding: 8px 15px !important;
+        transition: all 0.3s ease;
+      }
+      
+      .login-signup:hover {
+        background-color: white;
+        color: black !important;
+      }
+
+      @media (max-width: 1200px) {
+        .products-container {
+          grid-template-columns: repeat(3, 1fr); /* Maintain 3 columns */
+          gap: 30px;
+          padding: 0 30px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .products-container {
+          grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
+          gap: 20px;
+          padding: 0 20px;
+        }
+        
+        .shop-category {
+          margin: 5px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .products-container {
+          grid-template-columns: 1fr; /* 1 column on smallest screens */
+          gap: 15px;
+          padding: 0 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="overlay"></div>
+    <div id="mobile-menu" class="mobile-main-menu">
+      <ul>
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="#">MISSION</a></li>
+        <li><a href="#">LAUNCHES</a></li>
+        <li><a href="#">CAREERS</a></li>
+        <li><a href="#">UPDATES</a></li>
+        <li class="mobile-only"><a href="falcon9.html">FALCON 9</a></li>
+        <li class="mobile-only"><a href="falcon-heavy.html">FALCON HEAVY</a></li>
+        <li class="mobile-only"><a href="dragon.html">DRAGON</a></li>
+        <li class="mobile-only"><a href="#">STARSHIP</a></li>
+        <li class="mobile-only"><a href="#">HUMAN SPACEFLIGHT</a></li>
+        <li class="mobile-only"><a href="#">RIDESHARE</a></li>
+        <li class="mobile-only"><a href="#">STARLINK</a></li>
+        <li class="mobile-only"><a href="login.html">ACCOUNT</a></li>
+      </ul>
+    </div>
+    <header class="main-header">
+      <div class="logo">
+        <a href="index.html">
+          <img src="img/logo.png" alt="SpaceX" />
+        </a>
+      </div>
+      <nav class="desktop-main-menu">
+        <ul>
+          <li><a href="falcon9.html">FALCON 9</a></li>
+          <li><a href="falcon-heavy.html">FALCON HEAVY</a></li>
+          <li><a href="dragon.html">DRAGON</a></li>
+          <li><a href="#">STARSHIP</a></li>
+          <li><a href="#">HUMAN SPACEFLIGHT</a></li>
+          <li><a href="#">RIDESHARE</a></li>
+          <li><a href="#">STARLINK</a></li>
+          <li><a href="shop.html">SHOP</a></li>
+          <li><a href="account.html" class="login-signup">ACCOUNT</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="scroll-arrow">
+      <svg width="30px" height="20px">
+        <path
+          stroke="#ffffff"
+          fill="none"
+          stroke-width="2px"
+          d="M2.000,5.000 L15.000,18.000 L28.000,5.000 "
+        ></path>
+      </svg>
+    </div>
+
+    <!-- Hamburger Menu -->
+    <button id="menu-btn" class="hamburger" type="button">
+      <span class="hamburger-top"></span>
+      <span class="hamburger-middle"></span>
+      <span class="hamburger-bottom"></span>
+    </button>
+
+    <!-- Shop Header Banner -->
+    <section class="shop-a section-animate">
+      <div class="section-inner-center">
+        <h3>OFFICIAL SHOP</h3>
+        <p>WEAR YOUR SUPPORT FOR SPACE EXPLORATION</p>
+      </div>
+    </section>
+
+    <!-- Shop Categories -->
+    <div class="shop-categories">
+      <div class="shop-category active">ALL PRODUCTS</div>
+      <div class="shop-category">MEN'S</div>
+      <div class="shop-category">WOMEN'S</div>
+      <div class="shop-category">ACCESSORIES</div>
+      <div class="shop-category">KIDS</div>
+      <div class="shop-category">MEMORABILIA</div>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="products-container">
+      <!-- Product 1 -->
+      <div class="product-card">
+        <div class="product-image-container">
+          <img src="img/blackhood1.png" alt="Unisex SpaceX Zipper Hoodie" class="product-image primary">
+          <img src="img/blackhood2.png" alt="Unisex SpaceX Zipper Hoodie Detail" class="product-image secondary">
+        </div>
+        <div class="product-info">
+          <div class="product-title">UNISEX SPACEX ZIPPER HOODIE</div>
+          <div class="product-price">$45.00</div>
+          <a href="#" class="btn">
+            <div class="hover"></div>
+            <span>ADD TO CART</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="product-card">
+        <div class="product-image-container">
+          <img src="img/cap1.png" alt="Starlink Adjustable Cap" class="product-image primary">
+          <img src="img/cap2.png" alt="Starlink Adjustable Cap Detail" class="product-image secondary">
+        </div>
+        <div class="product-info">
+          <div class="product-title">STARLINK ADJUSTABLE CAP</div>
+          <div class="product-price">$30.00</div>
+          <a href="#" class="btn">
+            <div class="hover"></div>
+            <span>ADD TO CART</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="product-card">
+        <div class="product-image-container">
+          <img src="img/banana.png" alt="SpaceX Banana" class="product-image primary">
+          <img src="img/banana2.jpg" alt="SpaceX Banana Detail" class="product-image secondary">
+        </div>
+        <div class="product-info">
+          <div class="product-title">SPACEX BANANA</div>
+          <div class="product-price">$45.00</div>
+          <a href="#" class="btn">
+            <div class="hover"></div>
+            <span>ADD TO CART</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="product-card">
+        <div class="product-image-container">
+          <img src="img/Mech1.png" alt="SpaceX Mechzilla" class="product-image primary">
+          <img src="img/Mech2.png" alt="SpaceX Mechzilla Detail" class="product-image secondary">
+        </div>
+        <div class="product-info">
+          <div class="product-title">SPACEX MECHZILLA</div>
+          <div class="product-price">$45.00</div>
+          <a href="#" class="btn">
+            <div class="hover"></div>
+            <span>ADD TO CART</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Product 5 -->
+      <div class="product-card">
+        <div class="product-image-container">
+          <img src="img/dragon1.png" alt="Mens Dragon T-shirt" class="product-image primary">
+          <img src="img/dragon2.png" alt="Mens Dragon T-shirt Detail" class="product-image secondary">
+        </div>
+        <div class="product-info">
+          <div class="product-title">MENS DRAGON T-SHIRT</div>
+          <div class="product-price">$30.00</div>
+          <a href="#" class="btn">
+            <div class="hover"></div>
+            <span>ADD TO CART</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Product 6 -->
+      <div class="product-card">
+        <div class="product-image-container">
+          <img src="img/f91.png" alt="Mens F9 T-shirt" class="product-image primary">
+          <img src="img/f92.png" alt="Mens F9 T-shirt Detail" class="product-image secondary">
+        </div>
+        <div class="product-info">
+          <div class="product-title">MENS F9 T-SHIRT</div>
+          <div class="product-price">$35.00</div>
+          <a href="#" class="btn">
+            <div class="hover"></div>
+            <span>ADD TO CART</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Product 7 -->
+      <div class="product-card">
+        <div class="product-image-container">
+          <img src="img/fh1.png" alt="Women's Logo Tee" class="product-image primary">
+          <img src="img/fh2.png" alt="Women's Logo Tee Detail" class="product-image secondary">
+        </div>
+        <div class="product-info">
+          <div class="product-title">MENS FH T-SHIRT</div>
+          <div class="product-price">$35.00</div>
+          <a href="#" class="btn">
+            <div class="hover"></div>
+            <span>ADD TO CART</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Product 8 -->
+      <div class="product-card">
+        <div class="product-image-container">
+          <img src="img/Spl1.png" alt="Kids Astronaut Suit" class="product-image primary">
+          <img src="img/Spl2.png" alt="Kids Astronaut Suit Detail" class="product-image secondary">
+        </div>
+        <div class="product-info">
+          <div class="product-title">SPACEX SPECIAL T-SHIRT</div>
+          <div class="product-price">$65.00</div>
+          <a href="#" class="btn">
+            <div class="hover"></div>
+            <span>ADD TO CART</span>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Product 9 -->
+      <div class="product-card">
+        <div class="product-image-container">
+          <img src="img/banussy.png" alt="SpaceX Backpack" class="product-image primary">
+          <img src="img/banussy2.jpg" alt="Kids Astronaut Suit Detail" class="product-image secondary">
+        </div>
+        <div class="product-info">
+          <div class="product-title">BANANA PLUSHIE</div>
+          <div class="product-price">$85.00</div>
+          <a href="#" class="btn">
+            <div class="hover"></div>
+            <span>ADD TO CART</span>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Product 10 -->
+      <div class="product-card">
+        <div class="product-image-container">
+          <img src="img/bananusssy.png" alt="Starship Poster" class="product-image primary">
+        </div>
+        <div class="product-info">
+          <div class="product-title">SPACEX BANANA T-SHIRT</div>
+          <div class="product-price">$20.00</div>
+          <a href="#" class="btn">
+            <div class="hover"></div>
+            <span>ADD TO CART</span>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Product 11 -->
+      <div class="product-card">
+        <div class="product-image-container">
+          <img src="img/marooncap.png" alt="Metal Water Bottle" class="product-image primary">
+          <img src="img/marooncap2.png" alt="Metal Water Bottle Detail" class="product-image secondary">
+        </div>
+        <div class="product-info">
+          <div class="product-title">MAROON SPACEX CAP</div>
+          <div class="product-price">$35.00</div>
+          <a href="#" class="btn">
+            <div class="hover"></div>
+            <span>ADD TO CART</span>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Product 12 -->
+      <div class="product-card">
+        <div class="product-image-container">
+          <img src="img/fshirt.png" alt="Launch Team Jacket" class="product-image primary">
+          <img src="img/fshirt2.png" alt="Launch Team Jacket Detail" class="product-image secondary">
+        </div>
+        <div class="product-info">
+          <div class="product-title">DRAGON T-SHIRT EXCL</div>
+          <div class="product-price">$120.00</div>
+          <a href="#" class="btn">
+            <div class="hover"></div>
+            <span>ADD TO CART</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <ul>
+        <li>SPACEX &copy; 2025</li>
+        <li><a href="#">TWITTER</a></li>
+        <li><a href="#">YOUTUBE</a></li>
+        <li><a href="#">INSTAGRAM</a></li>
+        <li><a href="#">FLICKR</a></li>
+        <li><a href="#">LINKEDIN</a></li>
+        <li><a href="#">PRIVACY</a></li>
+        <li><a href="#">SUPPLIERS</a></li>
+      </ul>
+    </footer>
+  </body>
+</html>
